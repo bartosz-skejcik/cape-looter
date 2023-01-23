@@ -1,9 +1,9 @@
 <h1 align="center">Welcome to cape-stealer 👋</h1>
 <p>
-  <a href="https://www.npmjs.com/package/cape-stealer" target="_blank">
-    <img alt="Version" src="https://img.shields.io/npm/v/cape-stealer.svg">
+  <a href="https://www.npmjs.com/package/cape-looter" target="_blank">
+    <img alt="Version" src="https://img.shields.io/npm/v/cape-looter.svg">
   </a>
-  <a href="https://github.com/bartosz-skejcik/cape-stealer" target="_blank">
+  <a href="https://github.com/bartosz-skejcik/cape-looter" target="_blank">
     <img alt="Documentation" src="https://img.shields.io/badge/documentation-yes-brightgreen.svg" />
   </a>
   <a href="#" target="_blank">
@@ -13,33 +13,24 @@
 
 > Easy and Intuitive cape and cosmetics downloader for Cloaks+
 
-## Install
-
-```sh
-npx cape-stealer
-```
-
 ## Usage
 
 ```sh
-npx cape-stealer -y
+npx cape-looter -y
 ```
 
 ## Author
 
 👤 **j5on#9600**
 
-* Website: https://dev.paczesny.pl
-* Github: [@bartosz-skejcik](https://github.com/bartosz-skejcik)
-* LinkedIn: [@bartosz-skejcik](https://linkedin.com/in/bartosz-skejcik)
+-   Website: https://dev.paczesny.pl
+-   Github: [@bartosz-skejcik](https://github.com/bartosz-skejcik)
+-   LinkedIn: [@bartosz-skejcik](https://linkedin.com/in/bartosz-skejcik)
 
 ## 🤝 Contributing
 
-Contributions, issues and feature requests are welcome!<br />Feel free to check [issues page](https://github.com/bartosz-skejcik/cape-stealer/issues). 
+Contributions, issues and feature requests are welcome!<br />Feel free to check [issues page](https://github.com/bartosz-skejcik/cape-looter/issues).
 
 ## Show your support
 
 Give a ⭐️ if this project helped you!
-
-***
-_This README was generated with ❤️ by [readme-md-generator](https://github.com/kefranabg/readme-md-generator)_
