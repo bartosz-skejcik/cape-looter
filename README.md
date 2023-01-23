@@ -1,4 +1,4 @@
-<h1 align="center">Welcome to cape-stealer 👋</h1>
+<h1 align="center">Welcome to cape-looter 👋</h1>
 <p>
   <a href="https://www.npmjs.com/package/cape-looter" target="_blank">
     <img alt="Version" src="https://img.shields.io/npm/v/cape-looter.svg">

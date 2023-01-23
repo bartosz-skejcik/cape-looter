@@ -16,15 +16,15 @@ import fs from "fs";
 const sleep = (ms = 2000) => new Promise((r) => setTimeout(r, ms));
 
 async function welcome() {
-    const rainbowTitle = chalkAnimation.rainbow("Welcome to Cape Stealer! \n");
+    const rainbowTitle = chalkAnimation.rainbow("Welcome to Cape Looter! \n");
 
     await sleep(500);
     rainbowTitle.stop();
 
-    console.log(`${chalk.bold("🚨 Cape Stealer 🚨")}
+    console.log(`${chalk.bold("🚨 Cape Looter 🚨")}
 ${chalk.bold("🛠️ Version:")} 1.0.0
 ${chalk.bold("👤 Author:")} j5on#9600
-${chalk.bold("Drop a ⭐:")} https://github.com/bartosz-skejcik/cape-stealer
+${chalk.bold("Drop a ⭐:")} https://github.com/bartosz-skejcik/cape-looter
 `);
 }
 
