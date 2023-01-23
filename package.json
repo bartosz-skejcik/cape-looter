@@ -1,0 +1,21 @@
+{
+    "name": "cape-stealer",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "type": "module",
+    "scripts": {
+        "dev": "node index.js"
+    },
+    "bin": "./index.js",
+    "keywords": [],
+    "author": "Bartek Paczesny",
+    "license": "ISC",
+    "dependencies": {
+        "axios": "^1.2.3",
+        "chalk": "^5.2.0",
+        "chalk-animation": "^2.0.3",
+        "inquirer": "^9.1.4",
+        "nanospinner": "^1.1.0"
+    }
+}
