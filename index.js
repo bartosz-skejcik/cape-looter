@@ -24,6 +24,7 @@ async function welcome() {
     console.log(`${chalk.bold("🚨 Cape Looter 🚨")}
 ${chalk.bold("🛠️ Version:")} 1.1.0
 ${chalk.bold("👤 Author:")} j5on#9600
+${chalk.bold("📣 Cloaks+ discord:")} https://discord.gg/cloaks
 ${chalk.bold("Drop a ⭐:")} https://github.com/bartosz-skejcik/cape-looter
 `);
 }
