@@ -22,7 +22,7 @@ async function welcome() {
     rainbowTitle.stop();
 
     console.log(`${chalk.bold("🚨 Cape Looter 🚨")}
-${chalk.bold("🛠️ Version:")} 1.0.0
+${chalk.bold("🛠️ Version:")} 1.1.0
 ${chalk.bold("👤 Author:")} j5on#9600
 ${chalk.bold("Drop a ⭐:")} https://github.com/bartosz-skejcik/cape-looter
 `);
@@ -85,7 +85,9 @@ async function downloadModel(cosmetic) {
             spinner.success({ text: `Saved to ${cosmetic}.cfg!` });
         })
         .catch((error) => {
-            spinner.error({ text: "Error!" });
+            spinner.error({
+                text: chalk.red("Error ") + "while downloading files!",
+            });
             console.log(error);
         });
 }
@@ -105,7 +107,9 @@ async function downloadTexture(cosmetic) {
             spinner.success({ text: `Saved to ${cosmetic}.png!` });
         })
         .catch((error) => {
-            spinner.error({ text: "Error!" });
+            spinner.error({
+                text: chalk.red("Error ") + "while downloading files!",
+            });
             console.log(error);
         });
 }
@@ -147,7 +151,44 @@ async function downloadCape() {
             return true;
         })
         .catch((error) => {
-            spinner.error({ text: "Error!" });
+            spinner.error({
+                text: chalk.red("Error ") + "while downloading files!",
+            });
+            console.log(error);
+            return false;
+        });
+}
+
+async function downloadConfig() {
+    const answers = await inquirer.prompt({
+        name: "name",
+        type: "input",
+        message: "What's the player ign?",
+        default() {
+            return "j5on";
+        },
+    });
+
+    const configName = answers.name;
+
+    const spinner = createSpinner("Downloading...");
+    spinner.start();
+
+    // download config
+    axios({
+        method: "GET",
+        url: `http://161.35.130.99/users/${configName}.cfg`,
+        responseType: "stream",
+    })
+        .then((response) => {
+            response.data.pipe(fs.createWriteStream(`${configName}.cfg`));
+            spinner.success({ text: `Saved to ${configName}.cfg!` });
+            return true;
+        })
+        .catch((error) => {
+            spinner.error({
+                text: chalk.red("Error ") + "while downloading files!",
+            });
             console.log(error);
             return false;
         });
@@ -168,6 +209,10 @@ async function askWhatToDownload() {
                 value: "cape",
             },
             {
+                name: "👤 Player config",
+                value: "config",
+            },
+            {
                 name: "❌ Exit",
                 value: "exit",
             },
@@ -179,12 +224,17 @@ async function askWhatToDownload() {
             const cosmeticName = await askForCosmetic();
             const cosmeticFiles = await getCosmetic(cosmeticName);
             await downloadCosmetic(cosmeticName, cosmeticFiles);
-            await sleep(500);
+            await sleep(750);
             await askWhatToDownload();
             break;
         case "cape":
             await downloadCape();
-            await sleep(500);
+            await sleep(750);
+            await askWhatToDownload();
+            break;
+        case "config":
+            await downloadConfig();
+            await sleep(750);
             await askWhatToDownload();
             break;
         case "exit":
