@@ -7,9 +7,10 @@ import axios from "axios";
 import fs from "fs";
 
 export default class CapeLooter {
-    constructior() {
+    constructor(config) {
         this.files = [];
         this.cosmeticName = "";
+        this.config = config;
     }
 
     async askWhatToDownload() {
@@ -82,14 +83,39 @@ export default class CapeLooter {
             responseType: "stream",
         })
             .then((response) => {
-                response.data.pipe(fs.createWriteStream(`${cosmetic}.png`));
-                spinner.success({ text: `Saved to ${cosmetic}.png!` });
+                if (
+                    fs.existsSync(
+                        `${this.config.config.downloadPath}/${cosmetic}`
+                    )
+                ) {
+                    // write to a file in the config folder
+                    response.data.pipe(
+                        fs.createWriteStream(
+                            `${this.config.config.downloadPath}/${cosmetic}/${cosmetic}.png`
+                        )
+                    );
+                    spinner.success({
+                        text: `Saved to ${this.config.config.downloadPath}/${cosmetic}/${cosmetic}.png`,
+                    });
+                } else {
+                    fs.mkdirSync(
+                        `${this.config.config.downloadPath}/${cosmetic}`
+                    );
+                    // write to a file in the config folder
+                    response.data.pipe(
+                        fs.createWriteStream(
+                            `${this.config.config.downloadPath}/${cosmetic}/${cosmetic}.png`
+                        )
+                    );
+                    spinner.success({
+                        text: `Saved to ${this.config.config.downloadPath}/${cosmetic}/${cosmetic}.png`,
+                    });
+                }
             })
             .catch((error) => {
                 spinner.error({
                     text: chalk.red("Error ") + "while downloading files!",
                 });
-                console.log(error);
             });
     }
 
@@ -104,14 +130,38 @@ export default class CapeLooter {
             responseType: "stream",
         })
             .then((response) => {
-                response.data.pipe(fs.createWriteStream(`${cosmetic}.cfg`));
-                spinner.success({ text: `Saved to ${cosmetic}.cfg!` });
+                // write to a file in the config folder
+                if (
+                    fs.existsSync(
+                        `${this.config.config.downloadPath}/${cosmetic}`
+                    )
+                ) {
+                    response.data.pipe(
+                        fs.createWriteStream(
+                            `${this.config.config.downloadPath}/${cosmetic}/${cosmetic}.cfg`
+                        )
+                    );
+                    spinner.success({
+                        text: `Saved to ${this.config.config.downloadPath}/${cosmetic}/${cosmetic}.cfg`,
+                    });
+                } else {
+                    fs.mkdirSync(
+                        `${this.config.config.downloadPath}/${cosmetic}`
+                    );
+                    response.data.pipe(
+                        fs.createWriteStream(
+                            `${this.config.config.downloadPath}/${cosmetic}/${cosmetic}.cfg`
+                        )
+                    );
+                    spinner.success({
+                        text: `Saved to ${this.config.config.downloadPath}/${cosmetic}/${cosmetic}.cfg`,
+                    });
+                }
             })
             .catch((error) => {
                 spinner.error({
                     text: chalk.red("Error ") + "while downloading files!",
                 });
-                console.log(error);
             });
     }
 
@@ -137,8 +187,15 @@ export default class CapeLooter {
             responseType: "stream",
         })
             .then((response) => {
-                response.data.pipe(fs.createWriteStream(`${capeName}.png`));
-                spinner.success({ text: `Saved to ${capeName}.png!` });
+                // write to a file in the config folder
+                response.data.pipe(
+                    fs.createWriteStream(
+                        `${this.config.config.downloadPath}/${capeName}.png`
+                    )
+                );
+                spinner.success({
+                    text: `Saved to ${this.config.config.downloadPath}/${capeName}.png!`,
+                });
                 return true;
             })
             .catch((error) => {
@@ -172,8 +229,15 @@ export default class CapeLooter {
             responseType: "stream",
         })
             .then((response) => {
-                response.data.pipe(fs.createWriteStream(`${configName}.cfg`));
-                spinner.success({ text: `Saved to ${configName}.cfg!` });
+                // write to a file in the config folder
+                response.data.pipe(
+                    fs.createWriteStream(
+                        `${this.config.config.downloadPath}/${configName}.cfg`
+                    )
+                );
+                spinner.success({
+                    text: `Saved to ${this.config.config.downloadPath}/${configName}.cfg!`,
+                });
                 return true;
             })
             .catch((error) => {
@@ -236,8 +300,10 @@ export default class CapeLooter {
         rainbowTitle.stop();
 
         console.log(`${chalk.bold("🚨 Cape Looter 🚨")}
-    ${chalk.bold("🛠️ Version:")} 1.1.0
+    ${chalk.bold("🛠️  Version:")} 1.1.0
     ${chalk.bold("👤 Author:")} j5on#9600
+    ${chalk.bold("📝 Config:")} ${this.config.config.configPath}
+    ${chalk.bold("📂 Download:")} ${this.config.config.downloadPath}
     ${chalk.bold("📣 Cloaks+ discord:")} https://discord.gg/cloaks
     ${chalk.bold("Drop a ⭐:")} https://github.com/bartosz-skejcik/cape-looter
     `);
