@@ -11,6 +11,7 @@ export default class CapeLooter {
         this.files = [];
         this.cosmeticName = "";
         this.config = config;
+        this.version = "2.0.2";
     }
 
     async askWhatToDownload() {
@@ -300,7 +301,7 @@ export default class CapeLooter {
         rainbowTitle.stop();
 
         console.log(`${chalk.bold("🚨 Cape Looter 🚨")}
-    ${chalk.bold("🛠️  Version:")} 1.1.0
+    ${chalk.bold("🛠️  Version:")} ${this.version}
     ${chalk.bold("👤 Author:")} j5on#9600
     ${chalk.bold("📝 Config:")} ${this.config.config.configPath}
     ${chalk.bold("📂 Download:")} ${this.config.config.downloadPath}
