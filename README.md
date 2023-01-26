@@ -1,4 +1,4 @@
-<h1 align="center">Welcome to cape-looter 👋</h1>
+<h1 align="center">Welcome to CapeLooter 👋</h1>
 <p>
   <a href="https://www.npmjs.com/package/cape-looter" target="_blank">
     <img alt="Version" src="https://img.shields.io/npm/v/cape-looter.svg">
@@ -13,10 +13,15 @@
 
 > Easy and Intuitive cape and cosmetics downloader for Cloaks+
 
+## Installation
+```sh
+npm i cape-looter -g       
+```
+
 ## Usage
 
 ```sh
-npx cape-looter -y
+cape-looter
 ```
 
 ## Author
