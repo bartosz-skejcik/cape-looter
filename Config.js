@@ -4,6 +4,7 @@ import path from "path";
 export default class Config {
     constructor() {
         this.configObject = {
+            previewPath: this.getOS().home + "/.capelooter/previews",
             downloadPath: this.getOS().home + "/.capelooter/downloads",
             configPath: this.getOS().home + "/.capelooter/config.json",
         };

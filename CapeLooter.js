@@ -11,7 +11,7 @@ export default class CapeLooter {
         this.files = [];
         this.cosmeticName = "";
         this.config = config;
-        this.version = "2.0.2";
+        this.version = "2.1.0";
     }
 
     async askWhatToDownload() {
@@ -70,6 +70,9 @@ export default class CapeLooter {
             await this.sleep(750);
             // if the file is model -> downloadModel(cosmetic);
             if (files[i] === "model") this.downloadModel(cosmetic);
+            await this.sleep(750);
+            // if the file is preview -> downloadPreview(cosmetic);
+            if (files[i] === "preview") this.downloadPreview(cosmetic);
         }
     }
 
@@ -158,6 +161,34 @@ export default class CapeLooter {
                         text: `Saved to ${this.config.config.downloadPath}/${cosmetic}/${cosmetic}.cfg`,
                     });
                 }
+            })
+            .catch((error) => {
+                spinner.error({
+                    text: chalk.red("Error ") + "while downloading files!",
+                });
+            });
+    }
+
+    async downloadPreview(cosmetic) {
+        const spinner = createSpinner("Downloading...");
+        spinner.start();
+
+        // download preview
+        axios({
+            method: "GET",
+            url: `http://161.35.130.99/previews/${cosmetic}.png`,
+            responseType: "stream",
+        })
+            .then((response) => {
+                // write to a file in the config folder
+                response.data.pipe(
+                    fs.createWriteStream(
+                        `${this.config.config.previewPath}/${cosmetic}.png`
+                    )
+                );
+                spinner.success({
+                    text: `Saved to ${this.config.config.previewPath}/${cosmetic}.png`,
+                });
             })
             .catch((error) => {
                 spinner.error({
@@ -277,6 +308,10 @@ export default class CapeLooter {
                 },
                 {
                     name: "model",
+                    checked: false,
+                },
+                {
+                    name: "preview",
                     checked: false,
                 },
             ],
