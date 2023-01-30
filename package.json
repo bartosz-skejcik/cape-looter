@@ -1,6 +1,6 @@
 {
     "name": "cape-looter",
-    "version": "2.1.0",
+    "version": "2.1.5",
     "description": "",
     "main": "index.js",
     "type": "module",

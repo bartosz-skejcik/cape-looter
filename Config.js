@@ -5,6 +5,9 @@ export default class Config {
     constructor() {
         this.configObject = {
             previewPath: this.getOS().home + "/.capelooter/previews",
+            modelPath: this.getOS().home + "/.capelooter/models",
+            capePath: this.getOS().home + "/.capelooter/capes",
+            texturePath: this.getOS().home + "/.capelooter/textures",
             downloadPath: this.getOS().home + "/.capelooter/downloads",
             configPath: this.getOS().home + "/.capelooter/config.json",
         };

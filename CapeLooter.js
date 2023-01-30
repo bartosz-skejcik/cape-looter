@@ -11,7 +11,7 @@ export default class CapeLooter {
         this.files = [];
         this.cosmeticName = "";
         this.config = config;
-        this.version = "2.1.0";
+        this.version = "2.1.5";
     }
 
     async askWhatToDownload() {
@@ -87,32 +87,26 @@ export default class CapeLooter {
             responseType: "stream",
         })
             .then((response) => {
-                if (
-                    fs.existsSync(
-                        `${this.config.config.downloadPath}/${cosmetic}`
-                    )
-                ) {
+                if (fs.existsSync(`${this.config.config.texturePath}`)) {
                     // write to a file in the config folder
                     response.data.pipe(
                         fs.createWriteStream(
-                            `${this.config.config.downloadPath}/${cosmetic}/${cosmetic}.png`
+                            `${this.config.config.texturePath}/${cosmetic}.png`
                         )
                     );
                     spinner.success({
-                        text: `Saved to ${this.config.config.downloadPath}/${cosmetic}/${cosmetic}.png`,
+                        text: `Saved to ${this.config.config.texturePath}/${cosmetic}.png`,
                     });
                 } else {
-                    fs.mkdirSync(
-                        `${this.config.config.downloadPath}/${cosmetic}`
-                    );
+                    fs.mkdirSync(`${this.config.config.texturePath}`);
                     // write to a file in the config folder
                     response.data.pipe(
                         fs.createWriteStream(
-                            `${this.config.config.downloadPath}/${cosmetic}/${cosmetic}.png`
+                            `${this.config.config.texturePath}/${cosmetic}.png`
                         )
                     );
                     spinner.success({
-                        text: `Saved to ${this.config.config.downloadPath}/${cosmetic}/${cosmetic}.png`,
+                        text: `Saved to ${this.config.config.texturePath}/${cosmetic}.png`,
                     });
                 }
             })
@@ -136,29 +130,25 @@ export default class CapeLooter {
             .then((response) => {
                 // write to a file in the config folder
                 if (
-                    fs.existsSync(
-                        `${this.config.config.downloadPath}/${cosmetic}`
-                    )
+                    fs.existsSync(`${this.config.config.modelPath}/${cosmetic}`)
                 ) {
                     response.data.pipe(
                         fs.createWriteStream(
-                            `${this.config.config.downloadPath}/${cosmetic}/${cosmetic}.cfg`
+                            `${this.config.config.modelPath}/${cosmetic}/model.cfg`
                         )
                     );
                     spinner.success({
-                        text: `Saved to ${this.config.config.downloadPath}/${cosmetic}/${cosmetic}.cfg`,
+                        text: `Saved to ${this.config.config.modelPath}/${cosmetic}/model.cfg`,
                     });
                 } else {
-                    fs.mkdirSync(
-                        `${this.config.config.downloadPath}/${cosmetic}`
-                    );
+                    fs.mkdirSync(`${this.config.config.modelPath}/${cosmetic}`);
                     response.data.pipe(
                         fs.createWriteStream(
-                            `${this.config.config.downloadPath}/${cosmetic}/${cosmetic}.cfg`
+                            `${this.config.config.modelPath}/${cosmetic}/model.cfg`
                         )
                     );
                     spinner.success({
-                        text: `Saved to ${this.config.config.downloadPath}/${cosmetic}/${cosmetic}.cfg`,
+                        text: `Saved to ${this.config.config.modelPath}/${cosmetic}/model.cfg`,
                     });
                 }
             })
@@ -180,15 +170,28 @@ export default class CapeLooter {
             responseType: "stream",
         })
             .then((response) => {
-                // write to a file in the config folder
-                response.data.pipe(
-                    fs.createWriteStream(
-                        `${this.config.config.previewPath}/${cosmetic}.png`
-                    )
-                );
-                spinner.success({
-                    text: `Saved to ${this.config.config.previewPath}/${cosmetic}.png`,
-                });
+                if (fs.existsSync(`${this.config.config.previewPath}`)) {
+                    // write to a file in the config folder
+                    response.data.pipe(
+                        fs.createWriteStream(
+                            `${this.config.config.previewPath}/${cosmetic}.png`
+                        )
+                    );
+                    spinner.success({
+                        text: `Saved to ${this.config.config.previewPath}/${cosmetic}.png`,
+                    });
+                } else {
+                    fs.mkdirSync(`${this.config.config.previewPath}`);
+                    // write to a file in the config folder
+                    response.data.pipe(
+                        fs.createWriteStream(
+                            `${this.config.config.previewPath}/${cosmetic}.png`
+                        )
+                    );
+                    spinner.success({
+                        text: `Saved to ${this.config.config.previewPath}/${cosmetic}.png`,
+                    });
+                }
             })
             .catch((error) => {
                 spinner.error({
@@ -219,23 +222,33 @@ export default class CapeLooter {
             responseType: "stream",
         })
             .then((response) => {
-                // write to a file in the config folder
-                response.data.pipe(
-                    fs.createWriteStream(
-                        `${this.config.config.downloadPath}/${capeName}.png`
-                    )
-                );
-                spinner.success({
-                    text: `Saved to ${this.config.config.downloadPath}/${capeName}.png!`,
-                });
-                return true;
+                if (fs.existsSync(`${this.config.config.capePath}`)) {
+                    // write to a file in the config folder
+                    response.data.pipe(
+                        fs.createWriteStream(
+                            `${this.config.config.capePath}/${cosmetic}.png`
+                        )
+                    );
+                    spinner.success({
+                        text: `Saved to ${this.config.config.capePath}/${cosmetic}.png`,
+                    });
+                } else {
+                    fs.mkdirSync(`${this.config.config.capePath}`);
+                    // write to a file in the config folder
+                    response.data.pipe(
+                        fs.createWriteStream(
+                            `${this.config.config.capePath}/${cosmetic}.png`
+                        )
+                    );
+                    spinner.success({
+                        text: `Saved to ${this.config.config.capePath}/${cosmetic}.png`,
+                    });
+                }
             })
             .catch((error) => {
                 spinner.error({
                     text: chalk.red("Error ") + "while downloading files!",
                 });
-                console.log(error);
-                return false;
             });
     }
 
